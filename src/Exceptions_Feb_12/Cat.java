@@ -1,7 +1,7 @@
 package Exceptions_Feb_12;
 
 public class Cat {
-    private String name;
+    public String name;
     private int age;
 
     public Cat(String name) {

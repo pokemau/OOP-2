@@ -19,7 +19,7 @@ public class MyCatList {
             len++;
         } catch(ArrayIndexOutOfBoundsException e) {
             throw new ArrayFullException("The array is full and " +
-                    len + " cannot be inserted.");
+                    c.getName() + " cannot be inserted.");
         }
     }
 
@@ -41,10 +41,10 @@ public class MyCatList {
         }
     }
 
-    public boolean remove(String c) {
+    public boolean remove(String name) {
 
         for(int i = 0; i < len; i++) {
-            if(arr[i].getName().equals(c)) {
+            if(arr[i].getName().equals(name)) {
 
                 for(int j = i; j < len-1; j++) {
                     arr[j] = arr[j+1];
@@ -74,9 +74,10 @@ public class MyCatList {
         }
     }
 
-    public boolean contains(Cat c) {
+    public boolean contains(String name) {
         for(int i = 0; i < len; i++) {
-            if(arr[i].getName().equals(c.getName())) {
+
+            if(name.equals(arr[i].getName())) {
                 return true;
             }
         }
