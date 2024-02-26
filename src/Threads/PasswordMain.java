@@ -7,9 +7,6 @@ public class PasswordMain {
 
     static ArrayList<Thread> trd = new ArrayList<>();
 
-    static boolean found = false;
-
-
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 

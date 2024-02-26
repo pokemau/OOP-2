@@ -42,7 +42,7 @@ public class PasswordThread implements Runnable {
             for(int i = 1; i < len; i++) {
                 atk.append((char)('a'+res[i]));
             }
-//            System.out.println("THREAD: " + start + " = " + atk);
+            System.out.println("THREAD: " + start + " = " + atk);
         }
 
         if(atk.toString().equals(pass)) {
