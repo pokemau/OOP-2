@@ -3,45 +3,48 @@ package Bingo.BingoChecker;
 import Bingo.BingoCard;
 import Bingo.BingoGame;
 
-public class BingoColumnChecker extends BingoChecker{
+/*
+BingoColumnChecker - extends BingoChecker
+    fields:
+        - int col initialized at constructor
+    run method:
+        - loops through all card's elements at the specified col
+        - waits for the game to release result
+        - can be interrupted and when so, declare what element it was waiting for
+ */
+
+public class BingoColumnChecker extends BingoChecker {
+
     private int col;
 
-    public BingoColumnChecker(BingoCard bingoCard, int col) {
-        super(bingoCard);
+    public BingoColumnChecker(BingoCard card, int col) {
+        super(card);
         this.col = col-1;
     }
-/*
-        BingoColumnChecker - extends BingoChecker
-            fields:
-                - int col initialized at constructor
-            run method:
-                - loops through all card's elements at the specified col
-                - waits for the game to release result
-                - can be interrupted and when so, declare what element it was waiting for
-         */
 
     @Override
     public void run() {
 
-        int row = 0;
+        for(int i = 0; i < 5; i++) {
+            int currNum = card.getNums()[i][col];
 
-        for(int col = 0; col < 5; col++) {
-            int num = card.numbers[row][col];
+            if (currNum == 0) { continue; }
 
-            while(!BingoGame.results[num]) {
+            while(!BingoGame.res[currNum] && !BingoGame.bingo) {
 
                 try {
-
-                    synchronized (BingoGame.results) {
-                        BingoGame.results.wait();
+                    synchronized (BingoGame.res) {
+                        BingoGame.res.wait();
                     }
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
             }
+
+            if(BingoGame.bingo) { break; }
         }
 
-        System.out.println("Card " + card.getID() + " - completes col " + (col+1));
+
 
     }
 }

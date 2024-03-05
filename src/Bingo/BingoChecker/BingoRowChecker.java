@@ -1,45 +1,56 @@
 package Bingo.BingoChecker;
 
-
 import Bingo.BingoCard;
 import Bingo.BingoGame;
 
+/*
+BingoRowChecker - extends BingoChecker
+
+fields:
+    - int row initialized at constructor
+run method:
+    - loops through all card's elements at the specified row
+    - waits for the game to release result
+    - can be interrupted and when so, declare what element it was waiting for
+
+ */
 public class BingoRowChecker extends BingoChecker {
+
     private int row;
 
-    public BingoRowChecker(BingoCard bingoCard, int row) {
-        super(bingoCard);
+    public BingoRowChecker(BingoCard card, int row) {
+        super(card);
         this.row = row-1;
     }
-
-        /*
-        BingoRowChecker - extends BingoChecker
-            fields:
-                    - int row initialized at constructor
-            run method:
-                    - loops through all card's elements at the specified row
-                    - waits for the game to release result
-                    - can be interrupted and when so, declare what element it was waiting for
-         */
 
     @Override
     public void run() {
 
-        for(int col = 0; col < row; col++) {
-            int num = card.numbers[col][row];
+        /*
+        run method:
+            - loops through all card's elements at the specified row
+            - waits for the game to release result
+            - can be interrupted and when so, declare what element it was waiting for
+         */
 
-            while(!BingoGame.results[num]) {
+        for(int col = 0; col < 5; col++) {
+            int currNum = card.getNums()[row][col];
 
+            if (currNum == 0) { continue; }
+
+
+
+            while(!BingoGame.res[currNum] && !BingoGame.bingo) {
                 try {
-
-                    synchronized (BingoGame.results) {
-                        BingoGame.results.wait();
+                    synchronized (BingoGame.res) {
+                        BingoGame.res.wait();
                     }
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
             }
+
+            if (BingoGame.bingo) { break; }
         }
-        System.out.println("Card " + card.getID() + " - completes row " + (row+1));
     }
 }

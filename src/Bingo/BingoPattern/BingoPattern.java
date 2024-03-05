@@ -5,42 +5,40 @@ import Bingo.BingoChecker.BingoChecker;
 import Bingo.BingoGame;
 
 import java.util.ArrayList;
+import java.util.List;
 
+/*
+BingoPattern - abstract Runnable
+- only to be extended from actual pattern checkers
+
+fields:
+- list of BingoCheckers
+- the BingoCard to check against, initialized at constructor
+run method:
+- creates threads for BingoCheckers
+- starts them all at once
+- waits for all the threads to finish and when done,
+	- declare bingo
+	- output "Card [id] completes pattern" while printing all elements in card form
+	- stops all other threads
+- can be interrupted and when so, output "Card [id] loses"
+
+ */
 public abstract class BingoPattern implements Runnable {
+    ArrayList<BingoChecker> checkers;
+    private BingoCard card;
 
-    /*
-    BingoPattern - abstract Runnable
-        fields:
-            - list of BingoCheckers
-            - the BingoCard to check against, initialized at constructor
-
-        run method:
-            - creates threads for BingoCheckers
-            - starts them all at once
-            - waits for all the threads to finish and when done,
-                - declare bingo
-                - output "Card [id] completes pattern" while printing all elements in card form
-                - stops all other threads
-            - can be interrupted and when so, output "Card [id] loses"
-     */
-
-    ArrayList<BingoChecker> bingoCheckers;
-    BingoCard bingoCard;
-
-    public BingoPattern(BingoCard bingoCard) {
-        this.bingoCard = bingoCard;
-        bingoCheckers = new ArrayList<>();
+    public BingoPattern(BingoCard card) {
+        this.card = card;
+        checkers = new ArrayList<>();
     }
 
     @Override
     public void run() {
+        List<Thread> threads = new ArrayList<>();
 
-        ArrayList<Thread> threads = new ArrayList<>();
-
-        for(BingoChecker bingoChecker : bingoCheckers) {
-            threads.add(new Thread(bingoChecker));
-        }
-
+        for(BingoChecker checker : checkers)
+            threads.add(new Thread(checker));
         for(Thread t : threads)
             t.start();
 
@@ -52,13 +50,10 @@ public abstract class BingoPattern implements Runnable {
             }
         }
 
-
-        BingoGame.bingo = true;
-        if(BingoGame.bingo) {
-            bingoCard.printNums();
-
+        if(!BingoGame.bingo){
+            System.out.println("Card " + card.getID() + " completes pattern!");
+            card.printNums();
+            BingoGame.bingo = true;
         }
     }
-
-
 }
