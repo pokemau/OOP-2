@@ -1,6 +1,6 @@
-package Bingo.BingoChecker;
+package Threads.Bingo.BingoChecker;
 
-import Bingo.BingoCard;
+import Threads.Bingo.BingoCard;
 
 public abstract class BingoChecker implements Runnable {
     BingoCard card;

@@ -1,8 +1,8 @@
-package Bingo.BingoPattern;
+package Threads.Bingo.BingoPattern;
 
-import Bingo.BingoCard;
-import Bingo.BingoChecker.BingoColumnChecker;
-import Bingo.BingoChecker.BingoRowChecker;
+import Threads.Bingo.BingoCard;
+import Threads.Bingo.BingoChecker.BingoColumnChecker;
+import Threads.Bingo.BingoChecker.BingoRowChecker;
 
 /*
 BingoPatternPlus - extends BingoPattern

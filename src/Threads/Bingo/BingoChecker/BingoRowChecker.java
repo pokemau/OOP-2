@@ -1,7 +1,7 @@
-package Bingo.BingoChecker;
+package Threads.Bingo.BingoChecker;
 
-import Bingo.BingoCard;
-import Bingo.BingoGame;
+import Threads.Bingo.BingoCard;
+import Threads.Bingo.BingoGame;
 
 /*
 BingoRowChecker - extends BingoChecker

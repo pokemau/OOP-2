@@ -1,8 +1,8 @@
-package Bingo.BingoPattern;
+package Threads.Bingo.BingoPattern;
 
-import Bingo.BingoCard;
-import Bingo.BingoChecker.BingoChecker;
-import Bingo.BingoGame;
+import Threads.Bingo.BingoCard;
+import Threads.Bingo.BingoChecker.BingoChecker;
+import Threads.Bingo.BingoGame;
 
 import java.util.ArrayList;
 import java.util.List;

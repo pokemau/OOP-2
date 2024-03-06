@@ -1,6 +1,6 @@
-package Bingo;
+package Threads.Bingo;
 
-import Bingo.BingoPattern.BingoPatternPlus;
+import Threads.Bingo.BingoPattern.BingoPatternPlus;
 
 import java.util.ArrayList;
 import java.util.Random;

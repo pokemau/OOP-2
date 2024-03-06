@@ -1,4 +1,4 @@
-package Bingo;
+package Threads.Bingo;
 
 public class BingoMain {
 

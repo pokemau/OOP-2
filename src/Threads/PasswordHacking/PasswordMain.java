@@ -1,4 +1,4 @@
-package Threads;
+package Threads.PasswordHacking;
 
 import java.util.ArrayList;
 import java.util.Scanner;

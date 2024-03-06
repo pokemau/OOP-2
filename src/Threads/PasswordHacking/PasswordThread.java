@@ -1,4 +1,4 @@
-package Threads;
+package Threads.PasswordHacking;
 
 public class PasswordThread implements Runnable {
 
